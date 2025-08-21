@@ -18,7 +18,7 @@ export default function LandingPage() {
       {/* Header */}
       <header className="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto">
         <img src={VerinestLogo} alt="verinestlogo.svg" />
-        <CustomButton variant="primary" onClick={()=>{navigate("/login")}}>Get Started</CustomButton>
+        <CustomButton variant="primary" onClick={()=>navigate("/login")}>Get Started</CustomButton>
       </header>
 
       {/* Hero Section */}
@@ -37,7 +37,7 @@ export default function LandingPage() {
             <CustomButton
               variant="primary"
               className="bg-red-600 hover:bg-red-700"
-              onClick={()=>{navigate("/login")}
+              onClick={()=>navigate("/login")}
             >
               <span className="text-lg"></span>
               Get Started
