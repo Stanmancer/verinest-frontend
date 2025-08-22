@@ -67,7 +67,6 @@ export async function handleEmailSignUp({
 	setSignUpEmailError,
 	setIsLoading,
 	setErrors,
-	setUser,
 	toggleEmailVerify,
 	toggleEmailSignUp,
 }) {
@@ -112,19 +111,17 @@ export async function handleEmailSignUp({
 					passwordConfirm: signUpPasswordConfirm,
 					referral_code: referralCode || undefined,
 				}),
+				credentials: "include", // ensure cookie is included
 			}
 		);
 
 		const data = await response.json();
-		console.log(response);
 
 		if (response.ok) {
 			// Handle successful sign up
-			setUser({ ...data.data.user });
+			console.log("Sign up successful:", data);
 			toggleEmailSignUp();
 			toggleEmailVerify();
-
-			console.log("Sign up successful:", data);
 		} else if (response.status === 409) {
 			// Account already exists
 			setErrors({

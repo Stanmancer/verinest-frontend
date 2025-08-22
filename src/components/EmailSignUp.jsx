@@ -24,7 +24,6 @@ export default function EmailSignUp({
 	const [signUpPasswordConfirmError, setsignUpPasswordConfirmError] =
 		useState(false);
 
-	const [signUpError, setSignUpError] = useState("");
 	const [errors, setErrors] = useState({});
 
 	const navigate = useNavigate();
@@ -133,16 +132,18 @@ export default function EmailSignUp({
 							referralCode,
 							signUpPasswordConfirmError,
 							setSignUpEmailError,
-							setSignUpError,
 							setIsLoading,
 							setErrors,
-							setUser,
 							toggleEmailVerify,
 							toggleEmailSignUp,
 						});
 					}}
 					className="space-y-4"
 				>
+					<span className="text-center">
+						{errors.form && <ErrorMessage message={errors.form} />}
+					</span>
+
 					{/* First Name Input */}
 					<TextInput
 						type="text"
@@ -214,10 +215,6 @@ export default function EmailSignUp({
 						</button>
 						.
 					</div>
-
-					{signUpError && (
-						<p style={{ color: "#ef4444" }}>{signUpError}</p>
-					)}
 
 					{/* Sign Up Button */}
 					<button
