@@ -102,8 +102,10 @@ export default function Dashboard() {
 
 	useEffect(() => {
 		async function loadCurrentUser() {
+			setLoading(true);
+
 			try {
-				const token = localStorage.getItem("token"); // store token at login
+				const token = localStorage.getItem("token");
 				if (!token) {
 					navigate("/login");
 					return;
@@ -121,23 +123,30 @@ export default function Dashboard() {
 				);
 
 				const result = await res.json();
+				console.log("API /me response:", result);
 
-				if (res.ok && result.data) {
-					setUser(result.data);
+				if (res.ok && result.data?.user) {
+					setUser(result.data.user);
+					setUserData(result.data.user);
+					setLoading(false); // <-- important
 				} else {
 					navigate("/login");
 				}
-			} catch {
+			} catch (err) {
+				console.error("Error:", err);
 				navigate("/login");
+			} finally {
+				setLoading(false);
 			}
 		}
 
 		if (!user) {
 			loadCurrentUser();
+		} else {
+			setLoading(false);
+			setUserData(user);
 		}
 	}, [user, setUser, navigate]);
-
-	if (!user) return null;
 
 	const toggleBalanceVisibility = () => {
 		setBalanceVisible(!balanceVisible);
