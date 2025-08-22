@@ -173,7 +173,7 @@ export function handleSignOut({ setUser, navigate }) {
 		setUser(null);
 
 		// optionally clear localStorage/sessionStorage if you store tokens
-		localStorage.removeItem("authToken");
+		localStorage.removeItem("token");
 
 		// send user back to Landing page
 		navigate("/");

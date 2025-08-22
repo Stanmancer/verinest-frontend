@@ -187,7 +187,7 @@ export default function Dashboard() {
 			{/* Mobile Overlay */}
 			{sidebarOpen && (
 				<div
-					className="fixed inset-0 bg-[#d1cfcfc0]  bg-opacity-50 z-40 lg:hidden"
+					className="fixed inset-0 bg-[#00000080]  bg-opacity-50 z-40 lg:hidden"
 					onClick={() => setSidebarOpen(false)}
 				/>
 			)}
