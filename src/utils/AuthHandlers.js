@@ -41,6 +41,7 @@ export async function handleEmailSignIn({
 		console.log("API Response:", data);
 
 		if (response.ok) {
+			localStorage.setItem("token", data.token); // backend should be returning this
 			navigate("/dashboard");
 		} else {
 			setErrors({ form: data.message || "Sign in failed" });

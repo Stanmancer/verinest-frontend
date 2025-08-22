@@ -77,7 +77,7 @@ export default function Dashboard() {
 			if (data.status === "success") {
 				setUserData(data.data.user);
 
-				// Calculate streak based on account creation date (example logic)
+				// Calculate streak based on account creation date 
 				const accountCreationDate = new Date(data.data.user.createdAt);
 				const daysSinceCreation = Math.floor(
 					(new Date() - accountCreationDate) / (1000 * 60 * 60 * 24)
@@ -103,13 +103,23 @@ export default function Dashboard() {
 	useEffect(() => {
 		async function loadCurrentUser() {
 			try {
+				const token = localStorage.getItem("token"); // store token at login
+				if (!token) {
+					navigate("/login");
+					return;
+				}
+
 				const res = await fetch(
 					"https://verinest.up.railway.app/api/users/me",
 					{
 						method: "GET",
-						credentials: "include",
+						headers: {
+							Authorization: `Bearer ${token}`,
+							"Content-Type": "application/json",
+						},
 					}
 				);
+
 				const result = await res.json();
 
 				if (res.ok && result.data?.user) {
@@ -126,6 +136,7 @@ export default function Dashboard() {
 			loadCurrentUser();
 		}
 	}, [user, setUser, navigate]);
+
 
 	if (!user) return null;
 
