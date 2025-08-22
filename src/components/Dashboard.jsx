@@ -77,7 +77,7 @@ export default function Dashboard() {
 			if (data.status === "success") {
 				setUserData(data.data.user);
 
-				// Calculate streak based on account creation date 
+				// Calculate streak based on account creation date
 				const accountCreationDate = new Date(data.data.user.createdAt);
 				const daysSinceCreation = Math.floor(
 					(new Date() - accountCreationDate) / (1000 * 60 * 60 * 24)
@@ -122,8 +122,8 @@ export default function Dashboard() {
 
 				const result = await res.json();
 
-				if (res.ok && result.data?.user) {
-					setUser(result.data.user);
+				if (res.ok && result.data) {
+					setUser(result.data);
 				} else {
 					navigate("/login");
 				}
@@ -136,7 +136,6 @@ export default function Dashboard() {
 			loadCurrentUser();
 		}
 	}, [user, setUser, navigate]);
-
 
 	if (!user) return null;
 
